@@ -8,22 +8,20 @@ function App() {
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false";
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch data!");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
+    const fetchCoins = async () => {
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error("Failed to fetch data!");
+        const data = await res.json();
         setCoins(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchCoins();
   }, []);
 
   return <h1>Crypto Dash 🚀</h1>;
