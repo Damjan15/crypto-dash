@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CoinCard from "./components/CoinCard";
 
 function App() {
   const [coins, setCoins] = useState([]);
@@ -24,7 +25,26 @@ function App() {
     fetchCoins();
   }, []);
 
-  return <h1>Crypto Dash 🚀</h1>;
+  return (
+    <div>
+      <h1>Crypto Dash 🚀</h1>
+
+      {loading && <p>Loading...</p>}
+      {error && (
+        <div className="error">
+          <p>❌ {error}</p>
+        </div>
+      )}
+
+      {!loading && !error && (
+        <main className="grid">
+          {coins.map((coin) => (
+            <CoinCard coin={coin} key={coin.id} />
+          ))}
+        </main>
+      )}
+    </div>
+  );
 }
 
 export default App;
