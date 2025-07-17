@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router";
 
 import Spinner from "../components/Spinner";
 
+const API_URL = import.meta.env.VITE_COIN_API_URL;
+
 function CoinDetails() {
   const { id } = useParams();
   const [coin, setCoin] = useState(null);
@@ -12,7 +14,7 @@ function CoinDetails() {
   useEffect(() => {
     const fetchCoin = async () => {
       try {
-        const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`);
+        const res = await fetch(`${API_URL}/${id}`);
         if (!res.ok) throw new Error("Failed to fetch coin data");
 
         const data = await res.json();
