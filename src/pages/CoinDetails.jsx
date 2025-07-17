@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router";
 
+import Spinner from "../components/Spinner";
+
 function CoinDetails() {
   const { id } = useParams();
   const [coin, setCoin] = useState(null);
@@ -33,7 +35,7 @@ function CoinDetails() {
         {coin ? `${coin.name} (${coin.symbol.toUpperCase()})` : `Coin Details`}
       </h1>
 
-      {loading && <p>Loading...</p>}
+      {loading && <Spinner />}
       {error && <p className="error">❌ {error}</p>}
 
       {!loading && !error && coin && (
