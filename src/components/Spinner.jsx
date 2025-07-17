@@ -13,7 +13,6 @@ const Spinner = ({ color = "blue", size = "150" }) => {
         cssOverride={override}
         size={size}
         aria-label="Loading Spinner"
-        data-testId="loader"
       />
     </div>
   );
